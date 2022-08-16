@@ -20,7 +20,7 @@ auto createTextures() {
         string name{};
 
         size_t length{ strlen(imagePath) };
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i <= length; i++) {
             string character{ imagePath[i] };
             if (character == ".") {
                 read = false;
@@ -36,6 +36,7 @@ auto createTextures() {
 
         pieceSurfaces.emplace(name, surface);
     }
+    //PIECESURFACES = pieceSurfaces;
     return pieceSurfaces;
 }
 
@@ -64,16 +65,16 @@ int main(int argc, char* args[])
     Board chessPlayingField(VERT_SQUARES, HORZ_SQUARES);
     //vector<string> SQUARE_NAMES, int SQwidth,int SQheight, SDL_Surface* screenSurface
     chessPlayingField.buildPosition(SQUARE_NAMES, WIDTH_OF_SQUARES, HEIGHT_OF_SQUARES, renderer);
-
+    chessPlayingField.initPieces(pieceSurfaces, renderer);
     //SDL_UpdateWindowSurface(window);
 
 
-    SDL_Surface* surf = pieceSurfaces["queenBlack"];
+    SDL_Surface* surf = pieceSurfaces["kingWhite"];
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surf);
     if (!texture) {
-        printf("Failed to load image at %s: %s\n", surf, SDL_GetError());
+        cout << "texture not created properly";
     }
-    SDL_Rect dstrect = { 5, 5, 60, 60 };
+    SDL_Rect dstrect = { 20, 20, 60, 60 };
     SDL_RenderCopy(renderer, texture, NULL, &dstrect);
     SDL_RenderPresent(renderer);
 
@@ -94,10 +95,11 @@ int main(int argc, char* args[])
             SDL_RenderPresent(renderer);
         }
     }
-    SDL_Delay(1000);
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+
     cout << "\n Program Finished!";
     return true;
 

@@ -3,12 +3,13 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <SDL.h>
 
 #if !defined(MYLIB_CONSTANTS_H)
 #define MYLIB_CONSTANTS_H 1
 
 //Colors
-
+//map <std::string, SDL_Surface*> PIECESURFACES;
 const std::vector <int> BLACK{ 0,0,0 };
 const std::vector <int> WHITE{ 255,255,255 };
 const std::vector <int> RED{ 255,0,0 };
@@ -72,10 +73,23 @@ const std::vector <int> blackPromotionSquares{};
 
 //Piece pictures
 const std::vector <const char*> IMAGEPATH
-{ "Pieces/pawnWhite.bmp","Pieces/pawnBlack.bmp", "Pieces/rookWhite.bmp,","Pieces/rookBlack.bmp",
+{ "Pieces/pawnWhite.bmp","Pieces/pawnBlack.bmp", "Pieces/rookWhite.bmp","Pieces/rookBlack.bmp",
 	"Pieces/bishopWhite.bmp","Pieces/bishopBlack.bmp", "Pieces/knightWhite.bmp","Pieces/knightBlack.bmp",
 	"Pieces/queenWhite.bmp", "Pieces/queenBlack.bmp","Pieces/kingWhite.bmp","Pieces/kingBlack.bmp"
 	};
+
+//Swap sides?
+const bool SWAP{ false };
+const std::vector <std::string> STARTSON{
+	"11","12","13","14","15","16","17","18",
+	"21","22","23","24","25","26","27","28",
+	"71","72","73","74","75","76","77","78",
+	"81","82","83","84","85","86","87","88"
+};
+
+
+
+
 
 
 //COLOR OF SQUARES:

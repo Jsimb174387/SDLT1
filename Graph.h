@@ -11,8 +11,9 @@
 
 //modified graph to include direction
 class graph {
+
 public:
-    std::map <std::string, std::vector<std::string>>  gp;
+    std::map <std::string, std::vector<std::string>> gp;
     bool isEmpty();
 
     bool keyExists(std::string key);

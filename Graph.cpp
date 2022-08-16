@@ -36,7 +36,7 @@ using namespace std;
 
     void graph::simpleConnect(string key1, string key2) {
         //only connects one side
-        if (keyExists(key1) & keyExists(key2)) {
+        if (keyExists(key1) && keyExists(key2)) {
             append(key1, key2);
         }
     }
