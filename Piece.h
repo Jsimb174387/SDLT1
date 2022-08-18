@@ -3,17 +3,20 @@
 #include <SDL.h>
 #include <vector>
 #include "Square.h"
-class Piece {
+#include "Settings.h"
+
+class piece {
 private:
 	std::string name;
 	std::string color;
-	bool king = false;
-	SDL_Renderer* renderer;
-	std::vector <int> center;
+	std::vector <int> location;
 	std::string type;
-
+	std::string movementStyle;
+	std::map <std::string, square>* squareMapPTR;
 public:
-	Piece(std::string nameIn, std::string typeIn, std::string colorIn, SDL_Renderer* newRenderer, std::vector <int> centerIn);
+	piece(void);
+	piece(std::string nameIn, std::string typeIn, std::string colorIn, std::vector <int> centerIn,
+		std::map <std::string, square>* squareMap);
 
 	std::string getColor();
 
@@ -23,5 +26,5 @@ public:
 
 	void setLocation(std::vector<int> newCenter);
 
-	//square getLocationSquare(std::vector <square> sVector);
+	auto getLocationSquare();
 };

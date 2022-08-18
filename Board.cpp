@@ -2,14 +2,10 @@
 using namespace std;
 
 Board::Board(void)
+    :boardGraph{},
+    squareMap{},
+    directory{}
 {   
-    //graph boardGraph{};
-    //std::vector <square> squareVector{NULL};
-    //std::map <std::string, square> squareMap{NULL,NULL};
-    //std::map <std::vector<std::string>, std::string>  directory {NULL,NULL};
-
-
-
 }
 
 Board::Board(int VERT_SQUARES, int HORZ_SQUARES) {
@@ -27,7 +23,7 @@ void Board::buildPosition(vector<string> nameList, const int& SQwidth, const int
         int yName{ name[1] - '0'};
         std::cout << xName << yName << " ";
         //making a rectangle
-        SDL_Rect srcrect;
+        SDL_Rect srcrect{};
         const SDL_Rect* ptr{ &srcrect };
 
         srcrect.x = (xName - 1) * SQwidth;
@@ -76,13 +72,14 @@ void Board::buildPosition(vector<string> nameList, const int& SQwidth, const int
         vector <int> color{ c1,c2,c3 };
         vector <int> newEdge{ srcrect.x,srcrect.y };
         square newSquare(name, color, newEdge);
-        squareMap.emplace(name, newSquare);
+        square &ref{ newSquare };
+        squareMap.emplace(name, ref);
         std::cout << "pushed!\n";
-        squareVector.push_back(newSquare);
 
     }
     fillGraph(nameList);
 }
+
 
 void Board::initPieces(std::map <string, SDL_Surface*>& surfaceMap, SDL_Renderer* rend) {
     map <string, string> startingPositions{};
@@ -117,9 +114,14 @@ void Board::initPieces(std::map <string, SDL_Surface*>& surfaceMap, SDL_Renderer
         SDL_RenderCopy(rend, texture, NULL, &dstrect);
         cout << "added to rend \n";
     }
+
     SDL_RenderPresent(rend);
+}
+
+void renderPieces() {
 
 }
+
 
 
 void Board::fillGraph(vector<string> nameList) {
@@ -196,7 +198,7 @@ auto Board::getBoardGraph() {
 
 
 auto Board::getSquareGraph() {
-    return squareVector;
+    //return squareVector;
 }
 
 auto Board::getSquareMap() {

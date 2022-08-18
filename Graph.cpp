@@ -5,8 +5,13 @@ using namespace std;
 
 graph::graph(void)
 {
-    //std::map <std::string, std::vector<std::string>> gp{NULL,NULL};
+    std::map <std::string, std::vector<std::string>> gp{};
 
+}
+
+
+graph::~graph(void)
+{
 }
 
 //modified graph to include direction

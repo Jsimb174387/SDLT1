@@ -13,10 +13,11 @@
 class graph {
 
 public:
-    
+
     std::map <std::string, std::vector<std::string>> gp;
 
     graph(void);
+    ~graph(void);
     bool isEmpty();
 
     bool keyExists(std::string key);

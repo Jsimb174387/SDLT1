@@ -14,7 +14,6 @@ private:
 
 public:
 	graph boardGraph;
-	std::vector <square> squareVector;
 	std::map <std::string, square> squareMap;
 	//directory - maps init square, direction to move as a vector, and connects it with the 'new' square.
 	std::map <std::vector<std::string>, std::string>  directory;
