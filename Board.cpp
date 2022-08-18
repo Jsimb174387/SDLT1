@@ -1,6 +1,17 @@
 #include "Board.h"
 using namespace std;
 
+Board::Board(void)
+{   
+    //graph boardGraph{};
+    //std::vector <square> squareVector{NULL};
+    //std::map <std::string, square> squareMap{NULL,NULL};
+    //std::map <std::vector<std::string>, std::string>  directory {NULL,NULL};
+
+
+
+}
+
 Board::Board(int VERT_SQUARES, int HORZ_SQUARES) {
     //vector <square> squareVector{};
 
@@ -76,34 +87,37 @@ void Board::buildPosition(vector<string> nameList, const int& SQwidth, const int
 void Board::initPieces(std::map <string, SDL_Surface*>& surfaceMap, SDL_Renderer* rend) {
     map <string, string> startingPositions{};
     if (SWAP == false) {
-        map <string, string> startingPositions
+        startingPositions =
         {
-            {"11","whiteRook"},{"21","whiteKnight"},{"31","whiteBishop"},{"41","whiteQueen"},{"51","whiteKing"},
-            {"81","whiteRook"},{"71","whiteKnight"},{"61","whiteBishop"},
-            {"12","whitePawn"},{"22","whitePawn"},{"32","whitePawn"},{"42","whitePawn"},{"52","whitePawn"},
-            {"62","whitePawn"},{"72","whitePawn"},{"82","whitePawn"},
+            {"11","rookWhite"},{"21","knightWhite"},{"31","bishopWhite"},{"41","queenWhite"},{"51","kingWhite"},
+            {"81","rookWhite"},{"71","knightWhite"},{"61","bishopWhite"},
+            {"12","pawnWhite"},{"22","pawnWhite"},{"32","pawnWhite"},{"42","pawnWhite"},{"52","pawnWhite"},
+            {"62","pawnWhite"},{"72","pawnWhite"},{"82","pawnWhite"},
             
-            {"18","blackRook"},{"28","blackKnight"},{"38","blackBishop"},{"48","blackQueen"},{"58","blackKing"},
-            {"88","blackRook"},{"78","blackKnight"},{"68","blackBishop"},
-            {"17","blackPawn"},{"27","blackPawn"},{"37","blackPawn"},{"47","blackPawn"},{"57","blackPawn"},
-            {"67","blackPawn"},{"77","blackPawn"},{"87","blackPawn"}
+            {"18","rookBlack"},{"28","knightBlack"},{"38","bishopBlack"},{"48","queenBlack"},{"58","kingBlack"},
+            {"88","rookBlack"},{"78","knightBlack"},{"68","bishopBlack"},
+            {"17","pawnBlack"},{"27","pawnBlack"},{"37","pawnBlack"},{"47","pawnBlack"},{"57","pawnBlack"},
+            {"67","pawnBlack"},{"77","pawnBlack"},{"87","pawnBlack"}
         };
     }
-    else {
-        //swaps starting pos around, will complete later
+    for (auto conn : startingPositions) {
+        cout << conn.first << "-> " << conn.second << "\n";
     }
-    for (string sqName : STARTSON) {
-        string pieceType{ startingPositions[sqName] };
-        SDL_Surface* surf = surfaceMap[pieceType];
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(rend, surf);
+    for (auto conn : startingPositions) {
+        //SDL_Surface* surf = surfaceMap[conn.second];
+        string surf{ conn.second };
+        cout << conn.second << "\n";
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(rend, surfaceMap[surf]);
         if (!texture) {
-            cout << "texture not created properly";
+            cout << "texture not created properly \n";
         }
-    
-        vector <int> loc = squareMap[sqName].getLocation();
-        SDL_Rect dstrect = { loc[0], loc[1], 60, 60};
+        vector <int> loc = squareMap[conn.first].getLocation();
+        cout << loc[0] <<" " << loc[1] << "this is location \n";
+        SDL_Rect dstrect = { loc[0] + WIDTH_OF_SQUARES/6, loc[1] +HEIGHT_OF_SQUARES/6, 60, 60};
         SDL_RenderCopy(rend, texture, NULL, &dstrect);
+        cout << "added to rend \n";
     }
+    SDL_RenderPresent(rend);
 
 }
 
@@ -183,4 +197,8 @@ auto Board::getBoardGraph() {
 
 auto Board::getSquareGraph() {
     return squareVector;
+}
+
+auto Board::getSquareMap() {
+    return squareMap;
 }

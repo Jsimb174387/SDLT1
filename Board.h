@@ -21,6 +21,7 @@ public:
 	//map <string, square> redPieces;
 	//map <string, square> blackPieces;
 
+	Board(void);
 	Board(int VERT_SQUARES, int HORZ_SQUARES);
 
 	//draws squares that makes up the board
@@ -32,7 +33,7 @@ public:
 
 	auto getSquareGraph();
 
-	
+	auto getSquareMap();
 };
 
 

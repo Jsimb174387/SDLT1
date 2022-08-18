@@ -3,6 +3,12 @@
 #pragma once
 using namespace std;
 
+graph::graph(void)
+{
+    //std::map <std::string, std::vector<std::string>> gp{NULL,NULL};
+
+}
+
 //modified graph to include direction
     bool graph::isEmpty() {
         return gp.empty();
