@@ -32,7 +32,7 @@ piece::piece(std::string nameIn, std::string typeIn, std::string colorIn, std::v
 
 	auto piece::getLocationSquare() {
 		//look through board to find square center is in.
-		for (auto sq : *squareMapPTR) {
+		for (auto& sq : *squareMapPTR) {
 			
 		}
 	}

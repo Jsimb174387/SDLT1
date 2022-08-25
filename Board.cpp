@@ -4,7 +4,9 @@ using namespace std;
 Board::Board(void)
     :boardGraph{},
     squareMap{},
-    directory{}
+    directory{},
+    whitePieces{},
+    blackPieces{}
 {   
 }
 
@@ -97,10 +99,11 @@ void Board::initPieces(std::map <string, SDL_Surface*>& surfaceMap, SDL_Renderer
             {"67","pawnBlack"},{"77","pawnBlack"},{"87","pawnBlack"}
         };
     }
-    for (auto conn : startingPositions) {
-        cout << conn.first << "-> " << conn.second << "\n";
-    }
-    for (auto conn : startingPositions) {
+    //for (auto conn : startingPositions) {
+    //    //prints out startingPosition, for debugging reaons
+    //    cout << conn.first << "-> " << conn.second << "\n";
+    //}
+    for (auto& conn : startingPositions) {
         //SDL_Surface* surf = surfaceMap[conn.second];
         string surf{ conn.second };
         cout << conn.second << "\n";
@@ -113,6 +116,31 @@ void Board::initPieces(std::map <string, SDL_Surface*>& surfaceMap, SDL_Renderer
         SDL_Rect dstrect = { loc[0] + WIDTH_OF_SQUARES/6, loc[1] +HEIGHT_OF_SQUARES/6, 60, 60};
         SDL_RenderCopy(rend, texture, NULL, &dstrect);
         cout << "added to rend \n";
+        //std::map <std::string, square> squareMap;
+        std::map <std::string, square>;
+        int pawnWhite{ 0 };
+        int pawnBlack{0};
+        if (conn.second == "pawnWhite") {
+            pawnWhite++;
+            string name{conn.second + to_string(pawnWhite)};
+            std::map <std::string, square>* sqmPTR{&squareMap};
+            /*Pawn(std::string nameIn, std::string typeIn, std::string colorIn, std::vector <int> locIn,
+                std::map <std::string, square>*squareMapPTR, std::string directionIn)*/
+            Pawn newPawn(name, conn.second, "White", loc, sqmPTR, "S ");
+            Pawn& newPawnRef{newPawn};
+            whitePieces.emplace(name,newPawnRef);
+        }
+        else if (conn.second == "pawnBlack") {
+            pawnBlack++;
+            string name{ conn.second + to_string(pawnBlack) };
+            std::map <std::string, square>* sqmPTR{ &squareMap };
+            /*Pawn(std::string nameIn, std::string typeIn, std::string colorIn, std::vector <int> locIn,
+                std::map <std::string, square>*squareMapPTR, std::string directionIn)*/
+            Pawn newPawn(name, conn.second, "Black", loc, sqmPTR, "N ");
+            Pawn& newPawnRef{ newPawn };
+            whitePieces.emplace(name, newPawnRef);
+        }
+
     }
 
     SDL_RenderPresent(rend);

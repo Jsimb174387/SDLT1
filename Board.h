@@ -5,20 +5,22 @@
 #include "Graph.h"
 #include "Square.h"
 #include "Settings.h"
-
+#include "Pawn.h"
+#include <memory>
 class Board
 {
 private:
 	void fillGraph(std::vector<std::string> nameList);
 	//map <string, SDL_Surface*>& pieceSurfacesPTR;
-
+	
 public:
 	graph boardGraph;
 	std::map <std::string, square> squareMap;
 	//directory - maps init square, direction to move as a vector, and connects it with the 'new' square.
 	std::map <std::vector<std::string>, std::string>  directory;
-	//map <string, square> redPieces;
-	//map <string, square> blackPieces;
+	std::map <std::string, piece> whitePieces;
+	std::map <std::string, piece> blackPieces;
+
 
 	Board(void);
 	Board(int VERT_SQUARES, int HORZ_SQUARES);
